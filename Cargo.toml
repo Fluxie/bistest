@@ -1,0 +1,13 @@
+[package]
+name = "limited-integer-set-set"
+version = "0.1.0"
+authors = ["Juha Lepola <juha.lepola@gmail.com>"]
+
+[dependencies]
+    cuckoofilter = { git = "https://github.com/seiflotfy/rust-cuckoofilter", branch = "master"  }
+    rand = "0.3.15"
+    time = "0.1"
+
+[[bin]]
+
+name = "listest"
