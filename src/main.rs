@@ -5,7 +5,8 @@ extern crate time;
 
 mod integer_set;
 mod cuckoo_filter;
-mod vector_store;
+mod sorted_store;
+mod linear_store;
 
 use rand::Rng;
 use time::{Duration, PreciseTime};
@@ -20,7 +21,8 @@ fn main() {
     let member_count = 100000;
     let set = integer_set::create( set_size as usize, member_count );
     
-    let  vector = vector_store::VectorStore::new( &set );
+    let sorted  = sorted_store::SortedStore::new( &set );
+    let  linear = linear_store::LinearStore::new( &set );
     let cuckoo = cuckoo_filter::CuckooFilterStore::new( &set );
     
     // Generate search space.
@@ -33,19 +35,23 @@ fn main() {
     
     // Search.    
     let cuckoo_search = search( &search_space, &cuckoo );
-    let vector_search = search( &search_space, &vector );
+    let sorted_search = search( &search_space, &sorted );
+    let linear_search = search( &search_space, &linear );
     
-    let ( hits_from_vector, vector_duration ) = vector_search;
+    let ( hits_from_sorted, sorted_duration ) = sorted_search;
+    let ( hits_from_linear, linear_duration ) = linear_search;
     let ( hits_from_cuckoo, cuckoo_duration ) = cuckoo_search;
-    if hits_from_vector != hits_from_cuckoo {
+    if  hits_from_linear != hits_from_sorted || hits_from_linear != hits_from_cuckoo {
         println!( "Search failed" );    
     }
-    println!( "Hits: {}",  hits_from_vector );
-    println!( "Vector search took: {}", vector_duration );
-    println!( "Cuckoo  search took: {}", cuckoo_duration );
     
     println!("Set size is: {}", set.size);
     println!("Member count: {}", set.members.len());    
+    
+    println!( "Hits: {}",  hits_from_linear );    
+    println!( "Linear scan took: {}", linear_duration );    
+    println!( "Cuckoo  search took: {}", cuckoo_duration );
+    println!( "Binary search took: {}", sorted_duration );
 
 }
 

@@ -1,21 +1,21 @@
 
 use integer_set;
 
-pub struct VectorStore<'a> {    
+pub struct LinearStore<'a> {    
     members: &'a Vec<i32>     
     
 }
 
-impl<'a> VectorStore<'a> {
+impl<'a> LinearStore<'a> {
     
     pub fn new(         
         data: &'a integer_set::IntegerSet
-    )  -> VectorStore{        
-        return VectorStore { members: &data.members };    
+    )  -> LinearStore{        
+        return LinearStore { members: &data.members };    
     }
 }
 
-impl<'a> integer_set::SetStore for VectorStore<'a> {    
+impl<'a> integer_set::SetStore for LinearStore<'a> {    
     
     fn find(
         &self,
