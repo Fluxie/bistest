@@ -10,4 +10,4 @@ authors = ["Juha Lepola <juha.lepola@gmail.com>"]
 
 [[bin]]
 
-name = "listest"
+name = "bistest"
