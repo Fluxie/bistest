@@ -18,13 +18,13 @@ impl<'a> CuckooFilterStore {
     )  -> CuckooFilterStore{        
                      
         // Filter to members.
-        let mut  positive_filter  = cuckoofilter::CuckooFilter::with_capacity( data.members.len() as u64  );
+        let mut  positive_filter  = cuckoofilter::CuckooFilter::with_capacity( data.members.len() as u64  + 1000  );
         for m in &data.members {
             positive_filter.add( &m );
         }
         
         // Filter for non members.
-        let mut negative_filter = cuckoofilter::CuckooFilter::with_capacity( data.non_members.len() as u64  );
+        let mut negative_filter = cuckoofilter::CuckooFilter::with_capacity( data.non_members.len() as u64 + 1000 );
         for nm in &data.non_members {
             negative_filter.add( &nm );
         }

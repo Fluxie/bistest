@@ -42,6 +42,12 @@ The members are stored in a hash set / table and the membership is tested with a
 
 [Hash table](https://en.wikipedia.org/wiki/Hash_table)
 
+### Bit vector
+
+The members are stored as bits set in a bit vector. The vector has a storage bit for each allowed member.
+
+[Bit array](https://en.wikipedia.org/wiki/Bit_array)
+
 ## Preliminary Results
 
 All the members and tested valus are generated randomly.
@@ -50,31 +56,43 @@ All the members and tested valus are generated randomly.
 ### Set size: 200000, Tested values: 100
 #### Members: 100000
 
-* Linear search  took: PT0.004733594S
-* Binary search took: PT0.000029008S
-* Cuckoo search took: PT0.000009849S
-* Hash  search took: PT0.000002970S (fastest)
+* Linear search  took: 4672210 ns
+* Binary search took: 24788 ns
+* Cuckoo search took: 13219 ns
+* Hash search took: 3580 ns
+* Bit search took: 230 ns
 
 #### Members: 10000
 
-* Linear search  took: PT0.000532958S
-* Binary search took: PT0.000009009S
-* Cuckoo search took: PT0.000007579S
-* Hash  search took: PT0.000004230S (fastest)
+* Linear search  took: 671335 ns
+* Binary search took: 8669 ns
+* Cuckoo search took: 7239 ns
+* Hash search took: 2440 ns
+* Bit search took: 220 ns
 
 #### Members: 1000
 
-* Linear search  took: PT0.000057455S
-* Binary search took: PT0.000006740S
-* Cuckoo search took: PT0.000006090S
-* Hash  search took: PT0.000002040S (fastest)
+* Linear search  took: 68754 ns
+* Binary search took: 5800 ns
+* Cuckoo search took: 5619 ns
+* Hash search took: 2150 ns
+* Bit search took: 180 ns
 
 #### Members: 100
 
-* Linear search  took: PT0.000006620S
-* Binary search took: PT0.000004199S
-* Cuckoo search took: PT0.000005350S
-* Hash  search took: PT0.000002290S (fastest)
+* Linear search  took: 7169 ns
+* Binary search took: 3770 ns
+* Cuckoo search took: 5049 ns
+* Hash search took: 2210 ns
+* Bit search took: 190 ns
+
+#### Members: 10
+
+* Linear search  took: 1270 ns
+* Binary search took: 2250 ns
+* Cuckoo search took: 7469 ns
+* Hash search took: 2340 ns
+* Bit search took: 260 ns
 
 --------------
 

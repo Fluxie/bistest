@@ -15,7 +15,7 @@ pub fn create(
      
      // Generate members.
      let mut members: Vec<i32>  = Vec::with_capacity( member_count );
-     while members.len() < member_count   {             
+     while members.len() < member_count {             
          let member: i32 =  rand::thread_rng().gen_range( 1, set_size + 1  ) as i32;
          
          // Only add new values as members.
