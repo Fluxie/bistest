@@ -49,7 +49,7 @@ The size of the whole vector is included to simplify the implementation. The val
 
 When testing if a given value is a member of the set, the bucket is determined with the modulo operation. After finding the correct bucket, a binary search is applied to the bucket to determine if the tested value is actually in the bucket.
 
-The current implementation splits the members into buckets so that each bucket holds on average 5% of the values. The space overhead is then also 5%. The lookup speed and space overhead can be adjusted by adjusting the number of buckets relative to the number of set members and the upper bound of the possible values in the set.
+The current implementation splits the members into buckets so that each bucket holds on average 20 values. The space overhead is then 5%. The lookup speed and space overhead can be adjusted by adjusting the number of buckets relative to the number of set members and the upper bound of the possible values in the set.
 
 
 ### Hash set/table lookup
