@@ -89,21 +89,21 @@ All the set members and the tested valus are generated randomly.
 
 #### Members: 1000
 
-* Linear search  took: 56475 ns
-* Binary search took: 6990 ns
-* Cuckoo search took: 5860 ns
-* Array hash search took: 3640 ns
-* Hash search took: 2239 ns
-* Bit search took: 190 ns
+* Linear search  took: 58716 ns
+* Binary search took: 6839 ns
+* Cuckoo search took: 5329 ns
+* Array hash search took: 3799 ns
+* Hash search took: 2030 ns
+* Bit search took: 170 ns
 
 #### Members: 100
 
-* Linear search  took: 56475 ns
-* Binary search took: 6990 ns
-* Cuckoo search took: 5860 ns
-* Array hash search took: 3640 ns
-* Hash search took: 2239 ns
-* Bit search took: 190 ns
+* Linear search  took: 6679 ns
+* Binary search took: 4720 ns
+* Cuckoo search took: 5199 ns
+* Array hash search took: 3500 ns
+* Hash search took: 2350 ns
+* Bit search took: 180 ns
 
 #### Members: 10
 

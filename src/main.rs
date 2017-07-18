@@ -20,7 +20,7 @@ fn main() {
 
     // Prepare test set
     let set_size: i32 = 200000;
-    let member_count = 10;
+    let member_count = 1000;
     let set = integer_set::create( set_size as usize, member_count );
     
     // Prepare containers
