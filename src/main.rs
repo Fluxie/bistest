@@ -3,11 +3,13 @@
 extern crate rand;
 
 mod integer_set;
+mod ro_hash_set;
 mod cuckoo_filter;
 mod hash_store;
 mod sorted_store;
 mod linear_store;
 mod bit_store;
+mod ro_hash_store;
 
 use rand::Rng;
 use std::time;
@@ -18,7 +20,7 @@ fn main() {
 
     // Prepare test set
     let set_size: i32 = 200000;
-    let member_count = 100000;
+    let member_count = 10;
     let set = integer_set::create( set_size as usize, member_count );
     
     // Prepare containers
@@ -26,6 +28,7 @@ fn main() {
     let  linear = linear_store::LinearStore::new( &set );
     let cuckoo = cuckoo_filter::CuckooFilterStore::new( &set );
     let hash = hash_store::HashStore::new( &set );
+    let ro_hash = ro_hash_store::RoHashStore::new( &set );
     let bit  = bit_store::BitStore::new( &set );
     
     // Generate search set
@@ -42,6 +45,7 @@ fn main() {
     let sorted_search = search( &search_space, &sorted );
     let linear_search = search( &search_space, &linear );
     let bit_search = search( &search_space, &bit );
+    let ro_hash_search = search( &search_space, &ro_hash );
     
     // Extract results.
     let ( hits_from_sorted, sorted_duration ) = sorted_search;
@@ -49,7 +53,8 @@ fn main() {
     let ( hits_from_hash, hash_duration ) = hash_search;
     let ( hits_from_cuckoo, cuckoo_duration ) = cuckoo_search;
     let ( hits_from_bit, bit_duration ) = bit_search;
-    if  hits_from_linear != hits_from_sorted || hits_from_linear != hits_from_cuckoo || hits_from_linear != hits_from_hash   || hits_from_linear != hits_from_bit  {
+    let ( hits_from_ro_hash, ro_hash_duration ) = ro_hash_search;
+    if  hits_from_linear != hits_from_sorted || hits_from_linear != hits_from_cuckoo || hits_from_linear != hits_from_hash   || hits_from_linear != hits_from_bit  || hits_from_linear != hits_from_ro_hash {
         println!( "Search failed" );    
     }
     
@@ -61,7 +66,8 @@ fn main() {
     println!( "* Linear search  took: {} ns", linear_duration.subsec_nanos()  );           
     println!( "* Binary search took: {} ns", sorted_duration.subsec_nanos() );
     println!( "* Cuckoo search took: {} ns", cuckoo_duration.subsec_nanos() );
-    println!( "* Hash search took: {} ns", hash_duration.subsec_nanos() );
+    println!( "* Array hash search took: {} ns", ro_hash_duration.subsec_nanos() );
+    println!( "* Hash search took: {} ns", hash_duration.subsec_nanos() );    
     println!( "* Bit search took: {} ns", bit_duration.subsec_nanos() );
     println!( "" );
     println!( "Hits: {}",  hits_from_linear );    

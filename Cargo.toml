@@ -1,5 +1,5 @@
 [package]
-name = "limited-integer-set-set"
+name = "bounded-integer-set-set"
 version = "0.1.0"
 authors = ["Juha Lepola <juha.lepola@gmail.com>"]
 

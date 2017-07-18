@@ -11,12 +11,12 @@ Comparison of integer set lookup algorithm speed when the upper bound for the ma
 ## Algorithms
 
 ### Linear search
-The members of the set are stored in an array in arbitrary order. The membership is tested by scanning the whole memberhip array.
+The set members of the set are stored in an array in arbitrary order. The membership is tested by scanning the whole memberhip array.
 
 [Linear search](https://en.wikipedia.org/wiki/Linear_search)
 
 ### Binary search
-The members of the set are stored in a sorted array. The memberhip is tested with a binary search from the array.
+The set members of the set are stored in a sorted array. The memberhip is tested with a binary search from the array.
 
 [Binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 
@@ -37,14 +37,28 @@ If both filters give positive answer for a tested value then the sorted array is
 
 [Cuckoo Filter: Practically Better Than Bloom](https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf)
 
+### Array based hash set
+
+The set members and bookkeeping information of the hash set are stored in a single vector. The current implementation uses a simple modulo operator as the hashing function.
+
+Vector's contents:
+| # buckets | index to the first value in the 1st bucket | index to the first value in the 2nd bucket | ... | index to the first value of the last bucket | size of the whole vector | bucket data |
+
+The size of the whole vector is included to simplify the implementation. The values of each bucket are sorted to enable binary search.
+
+When testing if a given value is a member of the set, the bucket is determined with the modulo operation. After finding the correct bucket, a binary search is applied to the bucket to determine if the tested value is actually in the bucket.
+
+The current implementation splits the members into buckets so that each bucket holds on average 5% of the values. The space overhead is then also 5%. The lookup speed and space overhead can be adjusted by adjusting the number of buckets relative to the number of set members and the upper bound of the possible values in the set.
+
+
 ### Hash set/table lookup
-The members are stored in a hash set / table and the membership is tested with a search to the hash set.
+The set members are stored in a hash set / table provided by the Rust standard libray and the membership is tested with a simple lookup to the hash set.
 
 [Hash table](https://en.wikipedia.org/wiki/Hash_table)
 
 ### Bit vector
 
-The members are stored as bits set in a bit vector. The vector has a storage bit for each allowed member.
+The members are stored as bits set in a bit vector. The vector has a storage bit for each allowed set member.
 
 [Bit array](https://en.wikipedia.org/wiki/Bit_array)
 
@@ -56,43 +70,49 @@ All the members and tested valus are generated randomly.
 ### Set size: 200000, Tested values: 100
 #### Members: 100000
 
-* Linear search  took: 4672210 ns
-* Binary search took: 24788 ns
-* Cuckoo search took: 13219 ns
-* Hash search took: 3580 ns
-* Bit search took: 230 ns
+* Linear search  took: 3784944 ns
+* Binary search took: 29267 ns
+* Cuckoo search took: 15629 ns
+* Array hash search took: 4430 ns
+* Hash search took: 3520 ns
+* Bit search took: 229 ns
 
 #### Members: 10000
 
-* Linear search  took: 671335 ns
-* Binary search took: 8669 ns
-* Cuckoo search took: 7239 ns
-* Hash search took: 2440 ns
-* Bit search took: 220 ns
+* Linear search  took: 547165 ns
+* Binary search took: 10619 ns
+* Cuckoo search took: 7340 ns
+* Array hash search took: 3960 ns
+* Hash search took: 2680 ns
+* Bit search took: 190 ns
 
 #### Members: 1000
 
-* Linear search  took: 68754 ns
-* Binary search took: 5800 ns
-* Cuckoo search took: 5619 ns
-* Hash search took: 2150 ns
-* Bit search took: 180 ns
+* Linear search  took: 56475 ns
+* Binary search took: 6990 ns
+* Cuckoo search took: 5860 ns
+* Array hash search took: 3640 ns
+* Hash search took: 2239 ns
+* Bit search took: 190 ns
 
 #### Members: 100
 
-* Linear search  took: 7169 ns
-* Binary search took: 3770 ns
-* Cuckoo search took: 5049 ns
-* Hash search took: 2210 ns
+* Linear search  took: 56475 ns
+* Binary search took: 6990 ns
+* Cuckoo search took: 5860 ns
+* Array hash search took: 3640 ns
+* Hash search took: 2239 ns
 * Bit search took: 190 ns
 
 #### Members: 10
 
-* Linear search  took: 1270 ns
-* Binary search took: 2250 ns
-* Cuckoo search took: 7469 ns
-* Hash search took: 2340 ns
-* Bit search took: 260 ns
+* Linear search  took: 920 ns
+* Binary search took: 2460 ns
+* Cuckoo search took: 5070 ns
+* Array hash search took: 720 ns
+* Hash search took: 1419 ns
+* Bit search took: 170 ns
+
 
 --------------
 
