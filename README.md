@@ -42,7 +42,8 @@ If both filters give positive answer for a tested value then the sorted array is
 The set members and bookkeeping information of the hash set are stored in a single vector. The current implementation uses a simple modulo operator as the hashing function.
 
 Vector's contents:
-| # buckets | index to the first value in the 1st bucket | index to the first value in the 2nd bucket | ... | index to the first value of the last bucket | size of the whole vector | bucket data |
+
+| # buckets | index to the first value in the 1st bucket | index to the first value in the 2nd bucket | ... | index to the first value of the last bucket | size of the whole vector | 1st bucket | 2nd bucket | ... | last bucket |
 
 The size of the whole vector is included to simplify the implementation. The values of each bucket are sorted to enable binary search.
 
@@ -64,7 +65,7 @@ The members are stored as bits set in a bit vector. The vector has a storage bit
 
 ## Preliminary Results
 
-All the members and tested valus are generated randomly.
+All the set members and the tested valus are generated randomly.
 
 -------------
 ### Set size: 200000, Tested values: 100
