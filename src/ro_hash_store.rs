@@ -1,32 +1,33 @@
 
-use integer_set;
-use ro_hash_set;
+extern crate ro_scalar_set;
 
-pub struct RoHashStore {    
-    members: ro_hash_set::RoHashSet
-    
+use integer_set;
+
+pub struct RoHashStore<'s> {
+    members: ro_scalar_set::RoScalarSet<'s, i32>
+
 }
 
-impl RoHashStore {
-    
-    pub fn new(         
+impl<'s> RoHashStore<'s> {
+
+    pub fn new(
         data: & integer_set::IntegerSet
-    )  -> RoHashStore{        
-        
-        let members = ro_hash_set::RoHashSet::new( &data.members, data.size as i32 );        
-        return RoHashStore { members:  members };    
+    )  -> RoHashStore{
+
+        let members = ro_scalar_set::RoScalarSet::new( &data.members );
+        return RoHashStore { members:  members };
     }
 }
 
-impl integer_set::SetStore for RoHashStore {    
-    
+impl<'s> integer_set::SetStore for RoHashStore<'s> {
+
     fn find(
         &self,
         value: &i32
     ) -> bool {
-                
+
         let found = self.members.contains( value );
         return found;
     }
-    
+
 }

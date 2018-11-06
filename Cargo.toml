@@ -8,6 +8,11 @@ autobins = false
     cuckoofilter = { git = "https://github.com/seiflotfy/rust-cuckoofilter", branch = "master"  }
     rand = "0.3.15"
 
+[dependencies.ro_scalar_set]
+    # git = "https://github.com/Fluxie/ro_scalar_set.git"
+    path = "../ro_scalar_set"
+    features = ["floats"]
+
 [[bin]]
 
 name = "bistest"

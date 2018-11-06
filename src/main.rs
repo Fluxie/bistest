@@ -3,7 +3,6 @@
 extern crate rand;
 
 mod integer_set;
-mod ro_hash_set;
 mod cuckoo_filter;
 mod hash_store;
 mod sorted_store;
