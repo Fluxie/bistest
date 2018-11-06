@@ -2,6 +2,7 @@
 name = "bounded-integer-set-set"
 version = "0.1.0"
 authors = ["Juha Lepola <juha.lepola@gmail.com>"]
+autobins = false
 
 [dependencies]
     cuckoofilter = { git = "https://github.com/seiflotfy/rust-cuckoofilter", branch = "master"  }
