@@ -15,25 +15,25 @@ impl<'a> CuckooFilterStore {
 
     pub fn new(
         data: &'a integer_set::IntegerSet
-    )  -> CuckooFilterStore{
+    )  -> Result<CuckooFilterStore, cuckoofilter::CuckooError>{
 
         // Filter to members.
         let mut  positive_filter  = cuckoofilter::CuckooFilter::with_capacity( data.members.len() + 1000  );
         for m in &data.members {
-            positive_filter.add( &m );
+            positive_filter.add( &m )?;
         }
 
         // Filter for non members.
         let mut negative_filter = cuckoofilter::CuckooFilter::with_capacity( data.non_members.len() + 1000 );
         for nm in &data.non_members {
-            negative_filter.add( &nm );
+            negative_filter.add( &nm )?;
         }
 
         // Store the vector as sorted.
         let mut sorted = data.members.to_vec();
         sorted.sort();
 
-        return CuckooFilterStore { probable_members: positive_filter, probable_non_members: negative_filter, members: sorted  };
+        Ok( CuckooFilterStore { probable_members: positive_filter, probable_non_members: negative_filter, members: sorted  } )
     }
 }
 

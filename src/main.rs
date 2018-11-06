@@ -26,7 +26,7 @@ fn main() {
     // Prepare containers
     let sorted  = sorted_store::SortedStore::new( &set );
     let  linear = linear_store::LinearStore::new( &set );
-    let cuckoo = cuckoo_filter::CuckooFilterStore::new( &set );
+    let cuckoo = cuckoo_filter::CuckooFilterStore::new( &set ).expect( "Creating cuckoo filter failed." );
     let hash = hash_store::HashStore::new( &set );
     let ro_hash = ro_hash_store::RoHashStore::new( &set );
     let bit  = bit_store::BitStore::new( &set );
