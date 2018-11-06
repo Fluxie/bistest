@@ -21,7 +21,7 @@ The set members of the set are stored in a sorted array. The memberhip is tested
 [Binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 
 ### Cuckoo filter
-This scheme utilizes two cuckoon filters for fast lookup and a sorted array as a backup. 
+This scheme utilizes two cuckoon filters for fast lookup and a sorted array as a backup.
 
 Cuckoo filter is a probabilistic data structure. When testing if a given value is member of the set it gives the correct answer
 with a certain probability. The test will only return false positives. I.e. if the test outcome is negative then the value
@@ -32,7 +32,7 @@ The two cuckoon filters are constructred from:
   - When tested, if this filter returns false we know it is not a member of the set.
 - The difference of the whole value space and the set members.
   - When tested, if this filter returns false we know it is a member of the set.
-  
+
 If both filters give positive answer for a tested value then the sorted array is used as a backup.
 
 [Cuckoo Filter: Practically Better Than Bloom](https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf)
@@ -68,51 +68,79 @@ The members are stored as bits set in a bit vector. The vector has a storage bit
 All the set members and the tested valus are generated randomly.
 
 -------------
-### Set size: 200000, Tested values: 100
-#### Members: 100000
+### Domain: 0..200000
+### Lookups from the set: 100
 
-* Linear search  took: 3784944 ns
-* Binary search took: 29267 ns
-* Cuckoo search took: 15629 ns
-* Array hash search took: 4430 ns
-* Hash search took: 3520 ns
-* Bit search took: 229 ns
+### Members in the set: 10
 
-#### Members: 10000
+* Linear search took: 772 ns
+* Binary search took: 2294 ns
+* Cuckoo search took: 5901 ns
+* Array hash search took: 3166 ns
+* Hash search took: 2224 ns
+* Bit search took: 731 ns
 
-* Linear search  took: 547165 ns
-* Binary search took: 10619 ns
-* Cuckoo search took: 7340 ns
-* Array hash search took: 3960 ns
-* Hash search took: 2680 ns
+Hits: 0
+
+
+### Members in the set: 10
+
+* Linear search took: 541 ns
+* Binary search took: 2144 ns
+* Cuckoo search took: 5811 ns
+* Array hash search took: 3176 ns
+* Hash search took: 2344 ns
+* Bit search took: 160 ns
+
+Hits: 0
+
+
+### Members in the set: 100
+
+* Linear search took: 4810 ns
+* Binary search took: 4027 ns
+* Cuckoo search took: 6191 ns
+* Array hash search took: 4088 ns
+* Hash search took: 2846 ns
 * Bit search took: 190 ns
 
-#### Members: 1000
+Hits: 0
 
-* Linear search  took: 58716 ns
-* Binary search took: 6839 ns
-* Cuckoo search took: 5329 ns
-* Array hash search took: 3799 ns
-* Hash search took: 2030 ns
-* Bit search took: 170 ns
 
-#### Members: 100
+### Members in the set: 1000
 
-* Linear search  took: 6679 ns
-* Binary search took: 4720 ns
-* Cuckoo search took: 5199 ns
-* Array hash search took: 3500 ns
-* Hash search took: 2350 ns
-* Bit search took: 180 ns
+* Linear search took: 42981 ns
+* Binary search took: 5200 ns
+* Cuckoo search took: 6202 ns
+* Array hash search took: 4148 ns
+* Hash search took: 2905 ns
+* Bit search took: 181 ns
 
-#### Members: 10
+Hits: 0
 
-* Linear search  took: 920 ns
-* Binary search took: 2460 ns
-* Cuckoo search took: 5070 ns
-* Array hash search took: 720 ns
-* Hash search took: 1419 ns
-* Bit search took: 170 ns
+
+### Members in the set: 10000
+
+* Linear search took: 415184 ns
+* Binary search took: 7274 ns
+* Cuckoo search took: 7485 ns
+* Array hash search took: 4639 ns
+* Hash search took: 3376 ns
+* Bit search took: 191 ns
+
+Hits: 5
+
+
+### Members in the set: 100000
+
+* Linear search took: 3063257 ns
+* Binary search took: 10931 ns
+* Cuckoo search took: 14938 ns
+* Array hash search took: 6111 ns
+* Hash search took: 3667 ns
+* Bit search took: 231 ns
+
+Hits: 52
 
 
 --------------

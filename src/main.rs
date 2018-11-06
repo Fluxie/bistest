@@ -18,14 +18,14 @@ use integer_set::SetStore;
 fn main() {
 
     // Print headers.
-    let domain_size: i32 = 100000;
+    let domain_size: i32 = 200000;
     let search_count: usize = 100;
     println!("### Domain: 0..{}", domain_size);
     println!("### Lookups from the set: {}", search_count);
     println!("");
 
     // Run tests with different parameters.
-    let member_count = vec!( 10, 100, 1000 );
+    let member_count = vec!( 10, 10, 100, 1000, 10000, 100000 );
     for mc in member_count
     {
         run_test( domain_size, mc, search_count );
@@ -83,12 +83,11 @@ fn run_test(
         println!("");
     }
 
-
-    println!("### Members in a set: {}", set.members.len());
+    println!("### Members in the set: {}", set.members.len());
     println!("");
 
     // Report results.
-    println!( "* Linear search  took: {} ns", linear_duration.subsec_nanos()  );
+    println!( "* Linear search took: {} ns", linear_duration.subsec_nanos()  );
     println!( "* Binary search took: {} ns", sorted_duration.subsec_nanos() );
     println!( "* Cuckoo search took: {} ns", cuckoo_duration.subsec_nanos() );
     println!( "* Array hash search took: {} ns", ro_hash_duration.subsec_nanos() );
